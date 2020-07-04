@@ -12,7 +12,7 @@ create table if not exists Position (
     PositionName	varchar(20)
 );
 
-create table if not exists `Account` (
+create table if not exists Accounts (
 	AccountID 		int,
     Email			varchar(50),
     Username		varchar(20),
@@ -22,7 +22,7 @@ create table if not exists `Account` (
     CreateDate		date
 );
 
-create table if not exists `Group` (
+create table if not exists Group_ (
 	GroupID			int,
     GroupName		varchar(50),
     CreatorID		int,
@@ -66,7 +66,7 @@ create table if not exists Exam (
     CodeID			char(10),
     Title			varchar(20),
  	CategoryID		int,
-	Duration		date,
+	Duration		time,
     CreatorID		int,
     CreateDate		date
 );
@@ -75,6 +75,7 @@ create table if not exists ExamQuestion (
 	ExamID			int,
   	QuestionID		int
 );
+
 
 
 
