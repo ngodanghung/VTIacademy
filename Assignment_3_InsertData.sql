@@ -229,12 +229,25 @@ DELETE FROM exam
 WHERE
     CreateDate < '2019-12-20';
 -- Question 13: xóa tất cả các question có nội dung bắt đầu bằng từ "câu hỏi"
-
+set foreign_key_checks = 0;
+DELETE FROM question 
+WHERE
+    Content LIKE 'câu hỏi %';
 -- Question 14: update thông tin của account có id = 5 thành tên "Nguyễn Bá Lộc" và email thành loc.nguyenba@vti.com.vn
+UPDATE `account` 
+SET 
+    FullName = 'Nguyễn Bá Lộc',
+    Email = 'loc.nguyenba@vti.com.vn'
+WHERE
+    AccountID = 5;
 
 -- Question 15: update account có id = 5 sẽ thuộc group có id = 4
 
-
+UPDATE groupaccount 
+SET 
+    GroupID = 4
+WHERE
+    AccountID = 5;
 
 
 
