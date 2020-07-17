@@ -8,8 +8,10 @@ CREATE VIEW test_department AS
         *
     FROM
         `account`
+	JOIN department 
+    USING (DepartmentID)
     WHERE
-        DepartmentID = 2;
+        DepartmentName = 'Sale';
 SELECT 
     *
 FROM
@@ -26,7 +28,7 @@ SELECT *
 FROM CTE_account;
 
 -- Question 2: Tạo view có chứa thông tin các account tham gia vào nhiều group nhất
-WITH CTE_ac_group as
+WITH CTE_ac_group AS
 (SELECT *, GROUP_CONCAT(GroupID) 
 FROM groupaccount 
 GROUP BY AccountID 
