@@ -250,4 +250,21 @@ CALL testingsystem.getInfoMonthOfQuestion();
 /*Question 13: Viết store để in ra mỗi tháng có bao nhiêu câu hỏi được tạo trong 6
 tháng gần đây nhất (nếu tháng nào không có thì sẽ in ra là "không có câu hỏi nào
 trong tháng")*/
+DROP PROCEDURE IF EXISTS Six_month;
+DELIMITER $$
+CREATE PROCEDURE Six_month()
+BEGIN
+	SELECT last_six_months.`month`, 
+    IF(COUNT(q.QuestionID) = 0, 'khong co cau hoi nao trong thang', COUNT(q.QuestionID)) AS 'số câu hỏi'
+	FROM (SELECT MONTH(CURRENT_DATE - INTERVAL 5 MONTH) AS `month` UNION
+		  SELECT MONTH(CURRENT_DATE - INTERVAL 4 MONTH) AS `month` UNION
+		  SELECT MONTH(CURRENT_DATE - INTERVAL 3 MONTH) AS `month` UNION
+		  SELECT MONTH(CURRENT_DATE - INTERVAL 2 MONTH) AS `month` UNION
+		  SELECT MONTH(CURRENT_DATE - INTERVAL 1 MONTH) AS `month` UNION
+		  SELECT MONTH(CURRENT_DATE - INTERVAL 0 MONTH) AS `month`) AS last_six_months
+	LEFT JOIN question q ON last_six_months.`month` = MONTH(q.CreateDate)
+	GROUP BY last_six_months.`month`;
+END$$
+DELIMITER ;
 
+CALL Six_month();
